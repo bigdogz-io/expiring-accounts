@@ -1,9 +1,11 @@
 package io.bigdogz.expiringaccounts.api;
 
+import io.bigdogz.expiringaccounts.command.Account;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -44,6 +46,14 @@ public class AccountEndpoint {
             final AddFunds addFunds
     ) {
         commandGateway.send(addFunds);
+    }
+
+    @GetMapping(
+            value = "/account/{accountId}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public CompletableFuture<Account> getAccountById(@PathVariable(value = "accountId") final String accountId) {
+        return queryGateway.query("accountId", Account.class);
     }
 
     @PostMapping(
