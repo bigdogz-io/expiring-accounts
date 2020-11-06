@@ -1,0 +1,18 @@
+logging:
+  level:
+    io.bigdogz.expiringaccounts: DEBUG
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      enabled: true
+    info:
+      enabled: false
+spring:
+  application:
+    name: expiring-accounts
+  jmx:
+    enabled: false

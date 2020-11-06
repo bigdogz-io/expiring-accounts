@@ -29,6 +29,18 @@ and run queries.
 
 ## Running
 
+The application can be run as a standard Spring Boot application. However it is configured to be built and run with Helm 
+onto a Kubernetes cluster using skaffold.
+
+`skaffold dev`
+
+Assuming you have minikube or an external cluster configured this will build and deploy the application.
+
+**NOTE** 
+If you are using the `--port-forward` option to skaffold you may see a bunch of warnings about being unable to map
+pods to a service. Set an environment variable of `SKAFFOLD_DISABLE_SERVICE_FORWARDING=1` to make this go away. The 
+value of this variable doesn't matter, it just needs to be set.
+
 ### Prerequisites
 
 You must run both MongoDB and Axon Server on your local system for the application to function properly.

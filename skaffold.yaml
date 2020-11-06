@@ -1,0 +1,17 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+build:
+  local: {}
+  tagPolicy:
+    gitCommit: {}
+  artifacts:
+    - image: bigdogz/expiring-accounts
+      buildpacks:
+        builder: gcr.io/buildpacks/builder:v1
+deploy:
+  helm:
+    releases:
+      - name: expiring-accounts
+        chartPath: helm/expiring-accounts
+        artifactOverrides:
+          image.repository: bigdogz/expiring-accounts
